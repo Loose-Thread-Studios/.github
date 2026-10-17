@@ -1,0 +1,48 @@
+name: Feature or task
+description: Build or change a mechanic, system or piece of content.
+labels: ["type: feature", "status: needs-triage"]
+body:
+  - type: input
+    id: decisions
+    attributes:
+      label: GDD decisions
+      description: The decision IDs this serves, from the Decisions table in GameDesignDocument.md.
+      placeholder: D12, D22
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Player outcome
+      description: What the player should experience when this is done, written from their side.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      multiple: true
+      options:
+        - Code
+        - Art
+        - Audio
+        - Design
+        - Level
+        - UI
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance checks
+      description: How we will know it works in Play Mode. Copy them from the GDD section when it has them.
+      placeholder: |
+        - [ ] A new player avoids a Skitter rush on the second attempt
+        - [ ] Works on both sides of the world-wrap seam
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Open questions, tuning values, links to mockups or threads.

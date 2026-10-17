@@ -1,0 +1,42 @@
+name: Art or audio asset
+description: A new sprite, animation, sound or UI element, or a change to one.
+labels: ["type: asset", "status: needs-triage"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Art
+        - Audio
+        - UI
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What it is and where it shows
+      description: The object or moment, and whether it is new or replaces an existing file (give its path).
+    validations:
+      required: true
+  - type: input
+    id: size
+    attributes:
+      label: Size and frames
+      description: Canvas size in game pixels and the animation tags or frame count.
+      placeholder: 16x32, tags idle/run/boost
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: Art rules
+      description: From AGENTS.md and GDD D18.
+      options:
+        - label: AAP-64 colors only, no semi-transparent pixels
+        - label: 16 px per unit, Point filter, no compression, scale 1
+        - label: Checked against real terrain in day and night lighting
+        - label: Editable .aseprite source with named layers and tags
+  - type: textarea
+    id: references
+    attributes:
+      label: References and mockups
+      description: Links or images. Mockups are drafts, not the final asset.

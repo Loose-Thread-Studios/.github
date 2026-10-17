@@ -1,0 +1,82 @@
+name: Bug report
+description: Something in the build behaves wrongly, breaks or looks broken.
+labels: ["type: bug", "status: needs-triage"]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected to see instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Start from pressing Play in a scene. Include anything you held, pressed or equipped.
+      placeholder: |
+        1. Open MainScene and press Play
+        2. Boost left across the world-wrap seam
+        3. ...
+    validations:
+      required: true
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: How often
+      options:
+        - Every time
+        - Often
+        - Rarely
+        - Once
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Code
+        - Art
+        - Audio
+        - Design
+        - Level
+        - UI
+    validations:
+      required: true
+  - type: input
+    id: scene
+    attributes:
+      label: Scene and location
+      description: The scene, and where in it (a landmark, a position, near the seam).
+      placeholder: MainScene, arch cavern east ledge
+    validations:
+      required: true
+  - type: input
+    id: unity-version
+    attributes:
+      label: Unity version
+      description: From ProjectSettings/ProjectVersion.txt, or "build" if it happened in a built game.
+      placeholder: 6000.6.5f1
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Commit
+      description: Output of `git rev-parse --short HEAD`.
+  - type: dropdown
+    id: input-device
+    attributes:
+      label: Input device
+      options:
+        - Keyboard and mouse
+        - Gamepad
+        - Both
+        - Doesn't matter
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Console output, screenshots or video
+      description: Paste Console errors as text. Drag images or clips in here.
+      render: text
