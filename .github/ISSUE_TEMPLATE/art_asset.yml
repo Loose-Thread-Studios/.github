@@ -1,6 +1,6 @@
 name: Art or audio asset
 description: A new sprite, animation, sound or UI element, or a change to one.
-labels: ["type: asset", "status: needs-triage"]
+type: Asset
 body:
   - type: dropdown
     id: area

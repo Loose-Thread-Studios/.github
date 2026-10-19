@@ -1,6 +1,6 @@
 name: Feature or task
 description: Build or change a mechanic, system or piece of content.
-labels: ["type: feature", "status: needs-triage"]
+type: Feature
 body:
   - type: input
     id: decisions

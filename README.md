@@ -4,9 +4,24 @@ A draft for a team of four or five, made before the GitHub organization exists. 
 
 | File | What it is |
 | --- | --- |
-| `.github/ISSUE_TEMPLATE/` | Issue forms: bug report, feature or task, art or audio asset. Copy the folder into the repo root. |
-| `labels.yml` | The label set, with colors and descriptions. |
-| This README | The board's fields, views, workflow and example issues. |
+| `.github/ISSUE_TEMPLATE/` | Issue forms: bug report, feature or task, art or audio asset. GitHub offers them in every repo in the organization that has no `.github/ISSUE_TEMPLATE/` folder of its own. |
+| This README | Issue types, the board's fields, views, workflow and example issues. |
+
+## Issue types
+
+Every issue gets one organization issue type, which says what kind of work it is:
+
+| Type | Use for |
+| --- | --- |
+| Bug | The build behaves wrongly. |
+| Feature | A mechanic, system or piece of content to build or change. |
+| Task | Playtests, tooling, project settings, cleanup. |
+| Asset | A sprite, animation, sound or UI element. Custom type. |
+| Design | A GDD question or decision to make, not code. Custom type. |
+
+The repo has no labels. Types say what kind of work an issue is, and board fields cover the rest. Add a label only when the team keeps needing to filter for something that neither covers.
+
+When an issue can't move until another is done, or until a GDD decision is made, mark it as blocked by that issue (or the decision's Design issue) under Relationships in the issue sidebar.
 
 ## Board
 
@@ -16,6 +31,7 @@ One GitHub Projects board (a project in the organization) linked to the LonelyAs
 
 | Field | Type | Values | Why |
 | --- | --- | --- | --- |
+| Type | Issue type | Bug, Feature, Task, Asset, Design | Built-in field. Show it on cards and filter with `type:Bug`. |
 | Status | Single select | Backlog, Ready, In progress, In review, Playtest, Done | The board columns. Playtest holds work that is merged but not yet tried in Play Mode by someone other than its author. |
 | Area | Single select | Code, Art, Audio, Design, Level, UI | Who picks it up. Group the board by it to see each discipline's load. |
 | Milestone | Repository milestone | 1 Readable encounter, 2 Complete expedition, 3 Tune decisions, 4 Campaign | Mirrors the GDD's Milestones list, so "what's left for milestone 1" is one filter. |
@@ -24,7 +40,7 @@ One GitHub Projects board (a project in the organization) linked to the LonelyAs
 | Size | Single select | S (under a day), M (a few days), L (a week or more) | Rough effort. Split anything L before it reaches Ready. |
 | Iteration | Iteration | Two weeks | Optional. Add it when the team starts planning in sprints. |
 
-Issue forms can't fill board fields. The form asks for the area so the reporter's answer is in the issue body, and whoever triages sets the Area field and removes `status: needs-triage`.
+Issue forms can't fill board fields. The form asks for the area so the reporter's answer is in the issue body, and whoever triages sets the Area field. An empty Area is what marks an issue as untriaged.
 
 ### Views
 
@@ -33,7 +49,7 @@ Issue forms can't fill board fields. The form asks for the area so the reporter'
 | Board | Board | Columns by Status, sorted by Priority. The default view. |
 | By area | Board | Columns by Status, grouped by Area. |
 | Milestone | Table | Filter `milestone:"1 Readable encounter"`, grouped by Status, showing Area, Size and assignee. |
-| Triage | Table | Filter `label:"status: needs-triage"`. Empty at the end of each week. |
+| Triage | Table | Filter `no:area`. Empty at the end of each week. |
 | Roadmap | Roadmap | Milestones as date markers, items by Iteration. Add when iterations are on. |
 
 ### Built-in workflows
@@ -44,6 +60,7 @@ Turn on: item added to project sets Status to Backlog; item closed sets Status t
 
 - A card moves to Ready only when it has an Area, a Milestone, a Priority and acceptance checks.
 - Each person has at most two cards in progress.
+- Blocked work uses a "blocked by" relationship, so the board shows what it waits on.
 - A pull request links its issue with `Closes #n`, so merging moves the card.
 - Playtest to Done needs a second person to try it. Record what they saw in the GDD Results log when it is evidence about the design.
 
@@ -51,21 +68,21 @@ Turn on: item added to project sets Status to Backlog; item closed sets Status t
 
 Seeded from the repo and this project's work, to show how the board fills in. Numbers are placeholders.
 
-| # | Title | Labels | Area | Milestone | Priority | Status |
+| # | Title | Type | Area | Milestone | Priority | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Show suit health and gun charge pips on the HUD | type: asset | UI | 1 | P0 | In progress |
-| 2 | Recolor suit health and beacon sprites to AAP-64 | type: asset | Art | 1 | P1 | Ready |
-| 3 | Skitter brace, rush and recovery states read clearly | type: feature | Code | 1 | P0 | In review |
-| 4 | Run the combat comparison with two testers | type: playtest | Design | 1 | P1 | Backlog |
-| 5 | Choose the gun recharge model (D12) | type: design, status: needs-decision | Design | 1 | P1 | Backlog |
-| 6 | Enemy knockback on hit (D22) | type: feature | Code | 1 | P2 | Playtest |
-| 7 | Bullet hit passes through enemies at the wrap seam | type: bug, world-wrap | Code | 1 | P0 | Ready |
-| 8 | Block out the Wreck Basin route | type: feature | Level | 2 | P1 | Backlog |
-| 9 | Title screen with studio logo | type: asset | UI | 2 | P2 | Backlog |
-| 10 | Ship ambience and return-to-shelter sting | type: asset | Audio | 2 | P2 | Backlog |
-| 11 | Beacon assembly and rescue feedback | type: feature | Code | 2 | P1 | Backlog |
-| 12 | Set up Unity Smart Merge on every teammate's machine | type: chore, good first issue | Code | 1 | P2 | Ready |
-| 13 | Healthpack in the top-left of the HUD (D19) | type: feature | UI | 1 | P1 | Done |
-| 14 | Healthpack fully restores health (D21) | type: feature | Code | 1 | P1 | Done |
+| 1 | Show suit health and gun charge pips on the HUD | Asset | UI | 1 | P0 | In progress |
+| 2 | Recolor suit health and beacon sprites to AAP-64 | Asset | Art | 1 | P1 | Ready |
+| 3 | Skitter brace, rush and recovery states read clearly | Feature | Code | 1 | P0 | In review |
+| 4 | Run the combat comparison with two testers | Task | Design | 1 | P1 | Backlog |
+| 5 | Choose the gun recharge model (D12) | Design | Design | 1 | P1 | Backlog |
+| 6 | Enemy knockback on hit (D22) | Feature | Code | 1 | P2 | Playtest |
+| 7 | Bullet hit passes through enemies at the wrap seam | Bug | Code | 1 | P0 | Ready |
+| 8 | Block out the Wreck Basin route | Feature | Level | 2 | P1 | Backlog |
+| 9 | Title screen with studio logo | Asset | UI | 2 | P2 | Backlog |
+| 10 | Ship ambience and return-to-shelter sting | Asset | Audio | 2 | P2 | Backlog |
+| 11 | Beacon assembly and rescue feedback | Feature | Code | 2 | P1 | Backlog |
+| 12 | Set up Unity Smart Merge on every teammate's machine | Task | Code | 1 | P2 | Ready |
+| 13 | Healthpack in the top-left of the HUD (D19) | Feature | UI | 1 | P1 | Done |
+| 14 | Healthpack fully restores health (D21) | Feature | Code | 1 | P1 | Done |
 
-Issue 7 is an invented example of the kind of bug the world-wrap label is for, not a known bug.
+Issue 7 is an invented example, not a known bug.
