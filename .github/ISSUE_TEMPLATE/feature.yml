@@ -2,14 +2,6 @@ name: Feature or task
 description: Build or change a mechanic, system or piece of content.
 type: Feature
 body:
-  - type: input
-    id: decisions
-    attributes:
-      label: GDD decisions
-      description: The decision IDs this serves, from the Decisions table in GameDesignDocument.md.
-      placeholder: D12, D22
-    validations:
-      required: true
   - type: textarea
     id: outcome
     attributes:
